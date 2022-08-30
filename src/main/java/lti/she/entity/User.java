@@ -233,6 +233,17 @@ public class User {
 		return enroll;
 	}
 
+	@Override
+	public String toString() {
+		return "User [userId=" + userId + ", firstName=" + firstName + ", middleName=" + middleName + ", lastName="
+				+ lastName + ", email=" + email + ", password=" + password + ", contactNo=" + contactNo + ", aadhaarNo="
+				+ aadhaarNo + ", panNo=" + panNo + ", dob=" + dob + ", gender=" + gender + ", jobStatus=" + jobStatus
+				+ ", jobTitle=" + jobTitle + ", salary=" + salary + ", residenceArea=" + residenceArea
+				+ ", maritalStatus=" + maritalStatus + ", disabled=" + disabled + ", isVerified=" + isVerified
+				+ ", sukanyaAccount=" + sukanyaAccount + ", enroll=" + enroll + ", accomodationStatus="
+				+ accomodationStatus + ", familyMenbers=" + familyMenbers + "]";
+	}
+
 	public void setEnroll(List<Enrollment> enroll) {
 		this.enroll = enroll;
 	}

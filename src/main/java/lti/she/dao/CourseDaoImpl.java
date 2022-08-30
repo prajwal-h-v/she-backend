@@ -1,9 +1,11 @@
 package lti.she.dao;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 import javax.transaction.Transactional;
@@ -12,7 +14,7 @@ import org.springframework.stereotype.Repository;
 
 import lti.she.entity.Enrollment;
 import lti.she.entity.User;
-
+import lti.she.dto.UserIdDto;
 import lti.she.entity.Course;
 import lti.she.entity.Ngo;
 
@@ -69,6 +71,38 @@ public class CourseDaoImpl implements CourseDao {
 	public Course getCourseById(int courseId) {
 		return em.find(Course.class, courseId);
 	}
+	
+	
+	
+//	stepdashboard code
+//	public List<Course> listCourseForUser(UserIdDto userId){
+//		String jpql = "select c.* from Course c left join Enrollment e on c.courseID=e.courseId where e.userId=:userId";
+//		TypedQuery<Course> query = em.createQuery(jpql,Course.class);
+//		query.setParameter("userId", userId.getUserId());
+//		try {
+//			return query.getResultList();
+//		}
+//		catch (NoResultException e) {
+//				// TODO: handle exception
+//				return null;
+//		}
+	
+//	}
+	
+	public List<Course> listCourseForUser(int userId){
+		 List<Enrollment> listEnrollment = em.find(User.class,userId).getEnroll();
+		 List<Course> courses = new ArrayList<>();
+		 for(Enrollment e:listEnrollment) {
+			 e.getCourse().setNgo(null);
+	 		 courses.add(e.getCourse());
+		 }
+
+		 return courses;
+	}
+	
+	
+	
+	
 	
 
 }

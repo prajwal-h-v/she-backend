@@ -9,6 +9,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
@@ -18,6 +19,13 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 
 @Entity
 public class Course {
+
+	@Override
+	public String toString() {
+		return "Course [courseID=" + courseID + ", title=" + title + ", description=" + description + ", startDate="
+				+ startDate + ", durationMonth=" + durationMonth + ", location=" + location + ", jobOffered="
+				+ jobOffered + ", ngo=" + ngo + ", enrollments=" + enrollments + ", users=" + users + "]";
+	}
 
 	@Id
 	@SequenceGenerator(name="course_seq", initialValue = 100, allocationSize = 1)
@@ -42,6 +50,10 @@ public class Course {
 	@JsonBackReference
 	List<Enrollment> enrollments;
 
+	
+	//stepdashboard code
+	@ManyToMany
+    List<User> users;
 	
 
 	public int getCourseID() {

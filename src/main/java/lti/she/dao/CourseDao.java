@@ -4,7 +4,7 @@ import java.util.List;
 
 import lti.she.entity.Enrollment;
 import lti.she.entity.User;
-
+import lti.she.dto.UserIdDto;
 import lti.she.entity.Course;
 
 public interface CourseDao {
@@ -21,6 +21,9 @@ public interface CourseDao {
 	Enrollment enrollForCourse(Course course, Enrollment enrollment);
 	public Course getCourseById(int courseId);
 	public User getNgoById(int ngoId);
+	
+//	stepdashboard code
+	public List<Course> listCourseForUser(int userId);
 	
 	
 }

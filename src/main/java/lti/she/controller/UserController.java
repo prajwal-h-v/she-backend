@@ -6,12 +6,15 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import lti.she.dto.FamilyDetailsDto;
+import lti.she.dto.NgoLogin;
 //import lti.she.dto.UpdateDocumentDto;
 import lti.she.dto.UpdateUserDto;
 import lti.she.dto.UserIdDto;
@@ -19,8 +22,10 @@ import lti.she.dto.UserLoginDto;
 import lti.she.dto.UserPasswordChangeDto;
 import lti.she.dto.UserProfileDto;
 import lti.she.dto.UserRegisterDto;
+import lti.she.entity.Course;
 //import lti.she.entity.Document;
 import lti.she.entity.Family;
+import lti.she.entity.Ngo;
 //import lti.she.service.DocumentService;
 import lti.she.service.UserService;
 
@@ -81,6 +86,21 @@ public class UserController {
 	public List<Family> getFamilyDetails(@RequestBody UserIdDto userId) {
 		return userService.getFamilyDetails(userId.getUserId());
 	}
+	
+	
+	
+//	Step dashboard code
+//	@RequestMapping(value = "/list-course-by-user/{userId}/courses", method = RequestMethod.GET)
+//    public List<Course> listCoursesForUser(@RequestBody UserIdDto userId) {
+//		return userService.listCourseForUser(userId);
+//	}
+	
+	@RequestMapping(value = "/list-course-by-user/{userId}", method = RequestMethod.GET)
+	 public List<Course> listCourseForUser(@PathVariable int userId) {
+		return userService.listCourseForUser(userId);
+	}
+	
+	
 	
 //	@RequestMapping(value = "/updateAadhaar", method = RequestMethod.POST)
 //	public Document updateAadhaar(@RequestBody UpdateDocumentDto documentDto) {

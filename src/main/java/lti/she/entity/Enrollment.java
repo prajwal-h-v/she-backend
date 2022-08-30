@@ -59,6 +59,12 @@ public class Enrollment {
 		return user;
 	}
 
+	@Override
+	public String toString() {
+		return "Enrollment [enrollmentId=" + enrollmentId + ", registrationDate=" + registrationDate + ", course="
+				+ course + ", user=" + user + "]";
+	}
+
 	public void setUser(User user) {
 		this.user = user;
 	}

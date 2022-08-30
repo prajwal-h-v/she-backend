@@ -4,8 +4,10 @@ import java.util.List;
 
 import lti.she.dto.FamilyDetailsDto;
 import lti.she.dto.UpdateUserDto;
+import lti.she.dto.UserIdDto;
 import lti.she.dto.UserProfileDto;
 import lti.she.dto.UserRegisterDto;
+import lti.she.entity.Course;
 //import lti.she.entity.Document;
 import lti.she.entity.Family;
 
@@ -27,6 +29,14 @@ public interface UserService {
 	List<Family> getFamilyDetails(int userId);
 
 	Family addOrUpdateFamily(FamilyDetailsDto family);
+	
+	
+//	step dashboard code
+	
+	List<Course> listCourseForUser(int userId);
+	
+	
+	
 	
 //	Document updateAadhaar(int documentId, String link);
 	

@@ -7,10 +7,13 @@ import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import lti.she.dao.UserDao;
+import lti.she.dao.CourseDao;
 import lti.she.dto.FamilyDetailsDto;
 import lti.she.dto.UpdateUserDto;
+import lti.she.dto.UserIdDto;
 import lti.she.dto.UserProfileDto;
 import lti.she.dto.UserRegisterDto;
+import lti.she.entity.Course;
 //import lti.she.entity.Document;
 import lti.she.entity.Family;
 import lti.she.entity.User;
@@ -24,6 +27,10 @@ public class UserServiceImpl implements UserService {
 
 	@Autowired
 	UserDao userDao;
+	
+	
+	@Autowired
+	CourseDao courseDao;
 
 //	@Autowired
 //	EmailService emailService;
@@ -102,6 +109,14 @@ public class UserServiceImpl implements UserService {
 		return userDao.getFamilyDetails(userId);
 	}
 
+	
+//	step dashboard code
+	public List<Course> listCourseForUser(int userId){
+		return courseDao.listCourseForUser(userId);
+	}
+	
+	
+	
 //	public Document updateAadhaar(int documentId, String link) {
 //		return userDao.updateAadhaar(documentId, link);
 //	}
