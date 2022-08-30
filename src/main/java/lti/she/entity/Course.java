@@ -1,14 +1,20 @@
 package lti.she.entity;
 
 import java.time.LocalDate;
+import java.util.List;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 
 @Entity
 public class Course {
@@ -16,6 +22,7 @@ public class Course {
 	@Id
 	@SequenceGenerator(name="course_seq", initialValue = 100, allocationSize = 1)
 	@GeneratedValue(generator = "course_seq", strategy = GenerationType.SEQUENCE)
+
 	int courseID;
 	
 	String title;
@@ -28,6 +35,14 @@ public class Course {
 	@ManyToOne
 	@JoinColumn(name="ndo_id")
 	Ngo ngo;
+	
+	
+//	step added
+	@OneToMany(mappedBy = "course")
+	@JsonBackReference
+	List<Enrollment> enrollments;
+
+	
 
 	public int getCourseID() {
 		return courseID;
@@ -93,6 +108,13 @@ public class Course {
 		this.ngo = ngo;
 	}
 	
-	
+//	STEP ADDED
+	public List<Enrollment> getEnrollments() {
+		return enrollments;
+	}
+
+	public void setEnrollments(List<Enrollment> enrollments) {
+		this.enrollments = enrollments;
+	}
 	
 }

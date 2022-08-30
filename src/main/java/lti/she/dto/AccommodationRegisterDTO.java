@@ -15,6 +15,8 @@ public class AccommodationRegisterDTO {
 	int capacity;
 	boolean dayCareCenter;
 	
+//	STEP ADDED VARIABLE
+//	int roomAvailable;
 	
 	
 	@Override
@@ -84,6 +86,16 @@ public class AccommodationRegisterDTO {
 	public void setDayCareCenter(boolean dayCareCenter) {
 		this.dayCareCenter = dayCareCenter;
 	}
+	
+	
+//	STEP ADDED GETTERSAND SETTERS
+//	public int getRoomAvailable() {
+//		return roomAvailable;
+//	}
+//
+//	public void setRoomAvailable(int roomAvailable) {
+//		this.roomAvailable = roomAvailable;
+//	}
 	
 	public Accommodation toAccommodation() {
 		Accommodation accommodation = new Accommodation();

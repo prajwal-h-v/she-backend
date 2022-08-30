@@ -4,11 +4,15 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+
+
+import lti.she.entity.AccomodationStatus;
 
 import lti.she.dto.AccommodationRegisterDTO;
 import lti.she.entity.Accommodation;
@@ -32,5 +36,23 @@ public class AccommodationController {
 	public List<Accommodation> getAccommodationByNgo(@PathVariable int ngoId){
 		return accommodationService.listAccommodationsBtNgo(ngoId);
 	}
+	
+	
+	
+//	STEP ADDED
+	@GetMapping("/list-resdents-for-accomodation/{accomodationId}")
+	public List<AccomodationStatus> listResidentsForAccomodation(@PathVariable int accomodationId){
+		return accommodationService.listResidentsByAccomodationId(accomodationId);
+		
+	}
+	@GetMapping("/list-accomodation")
+	public List<Accommodation> listAllAccomodations(){
+		return accommodationService.listAllAccomodations();
+	}
+	@GetMapping("/{accomodationId}/register/{userId}")
+	public AccomodationStatus register(@PathVariable int accomodationId,@PathVariable int userId) {
+		return accommodationService.registerForAccomodation(accomodationId,userId);
+	}
+	
 	
 }

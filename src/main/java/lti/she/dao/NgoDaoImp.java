@@ -11,6 +11,8 @@ import javax.transaction.Transactional;
 
 import org.springframework.stereotype.Repository;
 
+//import lti.she.entity.NgoDocuments;
+
 import lti.she.dto.NgoLogin;
 import lti.she.entity.Ngo;
 
@@ -58,5 +60,73 @@ public class NgoDaoImp implements NgoDao{
 		return query.getResultList();
 		
 	}
+	
+	
+//	STEP ADDED
+	
+	@Transactional
+	public boolean verifyNgo(int ngoId) {
+		Ngo ngo = eManager.find(Ngo.class, ngoId);
+		ngo.setVerified(!ngo.isVerified());
+		try {
+			ngo = eManager.merge(ngo);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return false;
+		}
+		return true;
+	}
+
+	@Override
+	public long getCoursesCount(int ngoId) {
+		String jpql= "select count(c) from Course c where c.ngo=:ngoId" ;
+		TypedQuery<Long> query = eManager.createQuery(jpql, Long.class);
+		query.setParameter("ngoId", ngoId);
+		return query.getSingleResult();
+	}
+
+	@Override
+	public int getEnrollmentsCount(int ngoId) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int getAccomodationsCount(int ngoId) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int getResidentsCount(int ngoId) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int getDayCareCenterCount(int ngoId) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int getEnrolledDayCareCenters(int ngoId) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+//	@Override
+//	@Transactional
+//	public NgoDocuments registerDoc(NgoDocuments ngoDocuments) {
+//		
+//		return eManager.merge(ngoDocuments);
+//	}
+	
+	
+	
+	
+
+	
+	
     
 }

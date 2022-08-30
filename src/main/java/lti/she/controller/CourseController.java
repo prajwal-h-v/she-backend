@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import lti.she.entity.Enrollment;
+
 import lti.she.dto.CourseAddDTO;
 import lti.she.entity.Course;
 import lti.she.service.CourseService;
@@ -34,4 +36,20 @@ public class CourseController {
 		return courseService.listCourseByNgo(ngoID);
 	}
 
+	
+	
+//	STEP ADDED
+	@GetMapping("/list-enrollments-for-course/{courseId}")
+	public List<Enrollment> listEnrollmentsForCourse(@PathVariable int courseId){
+		return courseService.listUserEnrolledForCourse(courseId);
+		
+	}
+	@GetMapping("/list-course")
+	public List<Course> listAllCourses(){
+		return courseService.listAllCourses();
+	}
+	@GetMapping("/{courseId}/enroll/{userId}")
+	public Enrollment enroll(@PathVariable int courseId,@PathVariable int userId) {
+		return courseService.enrollForCourse(courseId,userId);
+	}
 }

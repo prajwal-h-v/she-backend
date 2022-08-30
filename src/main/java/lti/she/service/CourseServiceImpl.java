@@ -1,9 +1,14 @@
 package lti.she.service;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import lti.she.entity.Enrollment;
+import lti.she.entity.User;
+import lti.she.dao.UserDao;
 
 import lti.she.dao.CourseDao;
 import lti.she.dao.NgoDao;
@@ -18,6 +23,10 @@ public class CourseServiceImpl implements CourseService {
 	
 	@Autowired
 	CourseDao courseDao;
+	
+//	STEP ADDED
+	@Autowired
+	UserDao userDao;
 
 	@Override
 	public Course createCourse(CourseAddDTO courseAddDTO) {
@@ -43,5 +52,39 @@ public class CourseServiceImpl implements CourseService {
 		// TODO Auto-generated method stub
 		return courseDao.listCourseByNgo(ngoId);
 	}
+	
+	
+//	STEP ADDED
+	@Override
+	public List<Enrollment> listUserEnrolledForCourse(int courseId) {
+		return courseDao.listUserEnrolledForCourse(courseId);
+	}
+
+	@Override
+	public List<Course> listAllCourses() {
+		// TODO Auto-generated method stub
+		return courseDao.listAllCourses();
+
+	}
+
+	@Override
+	public Enrollment enrollForCourse(int courseId, int userId) {
+		// TODO Auto-generated method stub
+		Enrollment enrollment=new Enrollment();
+		System.out.println(courseId);
+		Course course=courseDao.getCourseById(courseId);
+		System.out.println(course);
+		User user=userDao.getUserById(userId);
+		enrollment.setUser(user);
+		enrollment.setCourse(course);
+		enrollment.setRegistrationDate(LocalDate.now());
+		
+//		course.setVacancy(course.getVacancy()-1);
+		
+		return courseDao.enrollForCourse(course, enrollment);
+	}
+	
+	
+	
 
 }
