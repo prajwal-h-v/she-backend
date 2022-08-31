@@ -7,12 +7,14 @@ import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import lti.she.dao.UserDao;
+import lti.she.dao.AccommodationDao;
 import lti.she.dao.CourseDao;
 import lti.she.dto.FamilyDetailsDto;
 import lti.she.dto.UpdateUserDto;
 import lti.she.dto.UserIdDto;
 import lti.she.dto.UserProfileDto;
 import lti.she.dto.UserRegisterDto;
+import lti.she.entity.Accommodation;
 import lti.she.entity.Course;
 //import lti.she.entity.Document;
 import lti.she.entity.Family;
@@ -31,6 +33,9 @@ public class UserServiceImpl implements UserService {
 	
 	@Autowired
 	CourseDao courseDao;
+	
+	@Autowired
+	AccommodationDao accommodationDao;
 
 //	@Autowired
 //	EmailService emailService;
@@ -113,6 +118,11 @@ public class UserServiceImpl implements UserService {
 //	step dashboard code
 	public List<Course> listCourseForUser(int userId){
 		return courseDao.listCourseForUser(userId);
+	}
+	
+	
+	public List<Accommodation> listAccomodationForUser(int userId){
+		return accommodationDao.listAccomodationForUser(userId);
 	}
 	
 	

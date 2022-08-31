@@ -1,5 +1,6 @@
 package lti.she.dao;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -11,6 +12,8 @@ import org.springframework.stereotype.Repository;
 
 
 import lti.she.entity.AccomodationStatus;
+import lti.she.entity.Course;
+import lti.she.entity.Enrollment;
 import lti.she.entity.User;
 
 import lti.she.entity.Accommodation;
@@ -71,6 +74,28 @@ public class AccommodationDaoImpl implements AccommodationDao {
 	@Override
 	public User getNgoById(int ngoId) {
 		return eManager.find(User.class, ngoId);
+	}
+	
+	
+//	stepdashboard code
+	 	
+	 
+	 
+	 
+	public List<Accommodation> listAccomodationForUser(int userId){
+		 List<AccomodationStatus> listAccomodationStatus = eManager.find(User.class,userId).getAccomodationStatus();
+		
+		 List<Accommodation> accomodations = new ArrayList<>();
+		 for(AccomodationStatus e:listAccomodationStatus) {
+			 e.getAccomodation().setNgo(null);
+			 e.getAccomodation().setAccomodation(null);
+	 		 accomodations.add(e.getAccomodation());
+	 		
+		 		 
+		 }
+		
+		 return accomodations;
+		 
 	}
 	
 

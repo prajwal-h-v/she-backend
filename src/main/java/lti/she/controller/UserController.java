@@ -22,6 +22,7 @@ import lti.she.dto.UserLoginDto;
 import lti.she.dto.UserPasswordChangeDto;
 import lti.she.dto.UserProfileDto;
 import lti.she.dto.UserRegisterDto;
+import lti.she.entity.Accommodation;
 import lti.she.entity.Course;
 //import lti.she.entity.Document;
 import lti.she.entity.Family;
@@ -98,6 +99,11 @@ public class UserController {
 	@RequestMapping(value = "/list-course-by-user/{userId}", method = RequestMethod.GET)
 	 public List<Course> listCourseForUser(@PathVariable int userId) {
 		return userService.listCourseForUser(userId);
+	}
+	
+	@RequestMapping(value = "/list-accommodation-by-user/{userId}", method = RequestMethod.GET)
+	 public List<Accommodation> listAccomodationForUser(@PathVariable int userId) {
+		return userService.listAccomodationForUser(userId);
 	}
 	
 	

@@ -4,6 +4,7 @@ import java.util.List;
 
 import lti.she.entity.Accommodation;
 import lti.she.entity.AccomodationStatus;
+import lti.she.entity.Course;
 import lti.she.entity.User;
 
 //import lti.she.entity.Accommodation;
@@ -19,5 +20,9 @@ public interface AccommodationDao {
 	AccomodationStatus registerForAccomodation(AccomodationStatus accomodation, Accommodation accomodation2);
 	public Accommodation getAccomodationById(int accomodationId);
 	public User getNgoById(int ngoId);
+	
+	
+//	stepdashboard code
+	public List<Accommodation> listAccomodationForUser(int userId);
 	
 }

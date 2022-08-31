@@ -7,6 +7,7 @@ import lti.she.dto.UpdateUserDto;
 import lti.she.dto.UserIdDto;
 import lti.she.dto.UserProfileDto;
 import lti.she.dto.UserRegisterDto;
+import lti.she.entity.Accommodation;
 import lti.she.entity.Course;
 //import lti.she.entity.Document;
 import lti.she.entity.Family;
@@ -34,6 +35,8 @@ public interface UserService {
 //	step dashboard code
 	
 	List<Course> listCourseForUser(int userId);
+	
+	List<Accommodation> listAccomodationForUser(int userId);
 	
 	
 	
