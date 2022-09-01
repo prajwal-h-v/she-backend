@@ -11,6 +11,7 @@ import lti.she.dao.AdminDao;
 import lti.she.dao.CourseDao;
 import lti.she.dao.NgoDao;
 import lti.she.dao.UserDao;
+import lti.she.dto.StaticsticDTO;
 import lti.she.dto.UserProfileDto;
 import lti.she.entity.Accommodation;
 import lti.she.entity.Admin;
@@ -145,6 +146,27 @@ public class AdminServiceImpl implements AdminService {
 			// TODO: handle exception
 			return false;
 		}
+		
+	}
+	
+	@Autowired
+	CourseService cs;
+	@Autowired 
+	AccommodationService as;
+	@Autowired
+	UserService us;
+	@Autowired
+	NgoService ns;
+	
+	@Override
+	public StaticsticDTO getStatistics() {
+		StaticsticDTO dto = new StaticsticDTO();
+		dto.setNgoCount(ns.getNgoList().size());
+		dto.setCoursesCount(cs.listAllCourses().size());
+		dto.setHostelCount(as.listAllAccomodations().size());
+		dto.setUserCount(us.listAllUsers().size());
+		System.out.println(dto);
+		return dto;
 		
 	}
 

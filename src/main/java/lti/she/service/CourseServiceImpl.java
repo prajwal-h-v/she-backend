@@ -1,6 +1,7 @@
 package lti.she.service;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +11,7 @@ import lti.she.dao.CourseDao;
 import lti.she.dao.NgoDao;
 import lti.she.dao.UserDao;
 import lti.she.dto.CourseAddDTO;
+import lti.she.dto.UserProfileDto;
 import lti.she.entity.Course;
 import lti.she.entity.Enrollment;
 import lti.she.entity.Ngo;
@@ -52,14 +54,31 @@ public class CourseServiceImpl implements CourseService {
 	}
 	
 	@Override
-	public List<Enrollment> listUserEnrolledForCourse(int courseId) {
-		return courseDao.listUserEnrolledForCourse(courseId);
+	public List<UserProfileDto> listUserEnrolledForCourse(int courseId) {
+		List<Enrollment> en =  courseDao.listUserEnrolledForCourse(courseId);
+		List<UserProfileDto> userProfileDtos = new ArrayList<UserProfileDto>();
+		for(Enrollment e:en) {
+			User user = e.getUser();
+			user.setAccommodationStatus(null);
+			user.setEnroll(null);
+			
+			userProfileDtos.add(new UserProfileDto(user));
+		}
+		return userProfileDtos;
 	}
 
 	@Override
 	public List<Course> listAllCourses() {
 		// TODO Auto-generated method stub
-		return courseDao.listAllCourses();
+		List<Course> courses = courseDao.listAllCourses();
+		List<Course> approvedCourses = new ArrayList<Course>();
+		for(Course course : courses) {
+			if(course.isVerified()) {
+				approvedCourses.add(course);
+			}
+		}
+		
+		return approvedCourses;
 
 	}
 

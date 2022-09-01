@@ -9,6 +9,7 @@ import lti.she.dto.UserRegisterDto;
 import lti.she.entity.Accommodation;
 import lti.she.entity.Course;
 import lti.she.entity.Family;
+import lti.she.entity.User;
 
 public interface UserService {
 	int signup(UserRegisterDto user);
@@ -32,5 +33,7 @@ public interface UserService {
 //	step dash board code
 	
 	List<Course> listCourseForUser(int userId);
-	List<Accommodation> listAccomodationForUser(int userId);
+	Accommodation listAccomodationForUser(int userId);
+	
+	List<UserProfileDto> listAllUsers();
 }

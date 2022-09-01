@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import lti.she.dto.AdminDto;
+import lti.she.dto.StaticsticDTO;
 import lti.she.dto.UserProfileDto;
 import lti.she.entity.Accommodation;
 import lti.she.entity.Admin;
@@ -103,6 +104,11 @@ public class AdminController {
 	@RequestMapping(value = "/delete-user", method = RequestMethod.POST)
 	public boolean deleteUser(@RequestBody int userId) {
 		return adminService.deleteUser(userId);
+	}
+	
+	@RequestMapping(value="/statistics", method = RequestMethod.GET)
+	public StaticsticDTO getStatictics() {
+		return adminService.getStatistics();
 	}
 	
 }

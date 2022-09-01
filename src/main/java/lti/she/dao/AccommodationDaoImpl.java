@@ -78,7 +78,11 @@ public class AccommodationDaoImpl implements AccommodationDao {
 	public AccommodationStatus registerForAccommodation(AccommodationStatus accomodationStatus,
 			Accommodation accomodation) {
 		eManager.merge(accomodation);
+		System.out.println(accomodationStatus.toString());
 		AccommodationStatus accStatus = eManager.merge(accomodationStatus);
+		User user = accStatus.getUser();
+		System.out.println(user.toString());
+		eManager.merge(user);
 		return accStatus;
 	}
 
@@ -90,14 +94,16 @@ public class AccommodationDaoImpl implements AccommodationDao {
 //	stepdashboard code
 
 	public List<Accommodation> listAccomodationForUser(int userId) {
+	
 		List<AccommodationStatus> listAccomodationStatus = eManager.find(User.class, userId).getAccommodationStatus();
-
+		System.out.println(listAccomodationStatus.size());
 		List<Accommodation> accomodations = new ArrayList<>();
 		for (AccommodationStatus e : listAccomodationStatus) {
 			e.getAccomodation().setNgo(null);
 			e.getAccomodation().setAccomodationStatuses(null);
 			accomodations.add(e.getAccomodation());
-
+			System.out.println("User is in "+e);
+			break;
 		}
 
 		return accomodations;

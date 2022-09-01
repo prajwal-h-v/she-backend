@@ -99,7 +99,8 @@ public class UserController {
 	}
 
 	@RequestMapping(value = "/list-accommodation-by-user/{userId}", method = RequestMethod.GET)
-	public List<Accommodation> listAccomodationForUser(@PathVariable int userId) {
+	public Accommodation listAccomodationForUser(@PathVariable int userId) {
+		
 		return userService.listAccomodationForUser(userId);
 	}
 

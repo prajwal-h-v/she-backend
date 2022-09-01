@@ -2,6 +2,7 @@ package lti.she.service;
 
 import java.util.List;
 
+import lti.she.dto.StaticsticDTO;
 import lti.she.dto.UserProfileDto;
 import lti.she.entity.Accommodation;
 import lti.she.entity.Admin;
@@ -25,4 +26,7 @@ public interface AdminService {
 	public List<UserProfileDto> getPendingUsers();
 	public boolean acceptUser(int userId);
 	public boolean deleteUser(int userId);
+	StaticsticDTO getStatistics();
+	
+	
 }

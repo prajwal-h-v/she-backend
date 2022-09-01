@@ -32,7 +32,13 @@ public class NgoServiceImp implements NgoService{
 	@Override
 	public List<Ngo> getNgoList() {
 		// TODO Auto-generated method stub
-		return dao.getAll();
+		List<Ngo> vNgos=new ArrayList<Ngo>();
+		for(Ngo ngo:dao.getAll()) {
+			if(ngo.isVerified()) {
+				vNgos.add(ngo);
+			}
+		}
+		return vNgos;
 	}
 
 	@Override

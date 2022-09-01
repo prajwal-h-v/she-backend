@@ -1,5 +1,6 @@
 package lti.she.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import lti.she.dto.FamilyDetailsDto;
@@ -31,7 +32,7 @@ public class UserServiceImpl implements UserService {
 
 //	@Autowired
 //	EmailService emailService;
-	
+
 	@Autowired
 	AccommodationDao accommodationDao;
 
@@ -114,10 +115,30 @@ public class UserServiceImpl implements UserService {
 		return courseDao.listCourseForUser(userId);
 	}
 
-	public List<Accommodation> listAccomodationForUser(int userId) {
-		return accommodationDao.listAccomodationForUser(userId);
+	public Accommodation listAccomodationForUser(int userId) {
+		List<Accommodation> acc = accommodationDao.listAccomodationForUser(userId);
+		if (acc.size() == 1) {
+			Accommodation ac = acc.get(0);
+			return ac;
+		}
+		return null;
 	}
 
+	@Override
+	public List<UserProfileDto> listAllUsers() {
+		// TODO Auto-generated method stub
+		List<User> users = userDao.getAllUsers();
+		List<UserProfileDto> vUsers = new ArrayList<UserProfileDto>();
+		for(User user :users) {
+			if(user.isVerified()) {
+				UserProfileDto dto = new UserProfileDto(user);
+				vUsers.add(dto);
+			}
+		}
+		return vUsers;
+	}
+	
+	
 //	public Document updateAadhaar(int documentId, String link) {
 //		return userDao.updateAadhaar(documentId, link);
 //	}

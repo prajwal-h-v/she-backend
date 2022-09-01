@@ -18,6 +18,13 @@ public class AccommodationStatus {
 
 	LocalDate fromDate;
 	LocalDate toDate;
+	@Override
+	public String toString() {
+		return "AccommodationStatus [accomodationStatusId=" + accomodationStatusId + ", fromDate=" + fromDate
+				+ ", toDate=" + toDate + ", dayCareAvailed=" + dayCareAvailed + ", accomodation=" + accomodation.getAccommodationId()
+				+ ", user=" + user.getFirstName() + "]";
+	}
+
 	boolean dayCareAvailed;
 
 	@ManyToOne

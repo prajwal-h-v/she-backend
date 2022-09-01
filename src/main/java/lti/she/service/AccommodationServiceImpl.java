@@ -1,6 +1,7 @@
 package lti.she.service;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -61,11 +62,15 @@ public class AccommodationServiceImpl implements AccommodationService {
 	@Override
 	public List<Accommodation> listAllAccomodations() {
 		List<Accommodation> accomodations = accommodationDao.listAllAccommodations();
+		List<Accommodation> vAccommodations = new ArrayList<Accommodation>();
 		for (Accommodation accomodation : accomodations) {
 			accomodation.setAccomodationStatuses(null);
 			accomodation.setNgo(null);
+			if(accomodation.isVerified()) {
+				vAccommodations.add(accomodation);
+			}
 		}
-		return accomodations;
+		return vAccommodations;
 	}
 
 	@Override
