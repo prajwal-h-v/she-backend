@@ -1,14 +1,18 @@
 package lti.she.entity;
 
 import java.time.LocalDate;
+import java.util.List;
 
-import javax.persistence.Entity;
+import javax.persistence.*;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 @Entity
 public class Course {
@@ -24,10 +28,44 @@ public class Course {
 	int durationMonth;
 	String location;
 	boolean jobOffered;
+	boolean isVerified;
 	
+	public boolean isVerified() {
+		return isVerified;
+	}
+
+	public void setVerified(boolean isVerified) {
+		this.isVerified = isVerified;
+	}
+
 	@ManyToOne
 	@JoinColumn(name="ndo_id")
 	Ngo ngo;
+	
+	@ManyToMany
+	@JoinColumn(name = "userId")
+	List<User> users;
+	
+//	step added
+	@OneToMany(mappedBy = "course")
+	@JsonBackReference
+	List<Enrollment> enrollments;
+
+	public List<User> getUsers() {
+		return users;
+	}
+
+	public void setUsers(List<User> users) {
+		this.users = users;
+	}
+
+	public List<Enrollment> getEnrollments() {
+		return enrollments;
+	}
+
+	public void setEnrollments(List<Enrollment> enrollments) {
+		this.enrollments = enrollments;
+	}
 
 	public int getCourseID() {
 		return courseID;

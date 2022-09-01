@@ -1,5 +1,6 @@
 package lti.she.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import lti.she.dto.CourseAddDTO;
 import lti.she.entity.Course;
+import lti.she.entity.Enrollment;
 import lti.she.service.CourseService;
 
 @RestController
@@ -29,9 +31,33 @@ public class CourseController {
 		return courseService.createCourse(courseDTO);
 	}
 	
-	@GetMapping("/list-course-by-ngo/{ngoID}")
-	public List<Course> listCourse(@PathVariable int ngoID){
-		return courseService.listCourseByNgo(ngoID);
+	@GetMapping("/list-course-by-ngo/{ngoID}/{flag}")
+	public List<Course> listCourse(@PathVariable int ngoID, @PathVariable boolean flag){
+		List<Course> courses = courseService.listCourseByNgo(ngoID);
+		List<Course> vCourses=new ArrayList<Course>();
+		for(Course course : courses) {
+			if(course.isVerified() == flag) {
+				vCourses.add(course);
+			}
+			
+		}
+		
+			
+		return vCourses;
+	}
+//	STEP ADDED
+	@GetMapping("/list-enrollments-for-course/{courseId}")
+	public List<Enrollment> listEnrollmentsForCourse(@PathVariable int courseId){
+		return courseService.listUserEnrolledForCourse(courseId);
+		
+	}
+	@GetMapping("/list-course")
+	public List<Course> listAllCourses(){
+		return courseService.listAllCourses();
+	}
+	@GetMapping("/{courseId}/enroll/{userId}")
+	public Enrollment enroll(@PathVariable int courseId,@PathVariable int userId) {
+		return courseService.enrollForCourse(courseId,userId);
 	}
 
 }

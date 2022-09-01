@@ -97,6 +97,7 @@ public class AccommodationRegisterDTO {
 		accommodation.setTotalRooms(totalRooms);
 		accommodation.setRoomAvailable(totalRooms);
 		accommodation.setDayCareCenter(dayCareCenter);
+		accommodation.setVerified(false);
 		return accommodation;
 		
 	}

@@ -15,5 +15,19 @@ public interface NgoDao {
 	Ngo getNgoById(int ngoId);
 
 	List<Ngo> getAll();
+	
+	void updateNgo(Ngo ngo);
+	
+	Ngo deleteNgo(Ngo ngo);
+	
+	
+//	STEP ADDED
+	boolean verifyNgo(int ngoId);
+	long getCoursesCount(int ngoId);
+	int getEnrollmentsCount(int ngoId);
+	int getAccomodationsCount(int ngoId);
+	int getResidentsCount(int ngoId);
+	int getDayCareCenterCount(int ngoId);
+	int getEnrolledDayCareCenters(int ngoId);
     
 }

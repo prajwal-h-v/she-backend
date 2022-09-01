@@ -3,20 +3,21 @@ package lti.she.dto;
 import lti.she.entity.Ngo;
 
 public class NgoRegisterDto {
-    String name;
+    String ngoname;
     String email;
     String password;
     String address;
     String description;
     String contact;
     boolean isVerified;
-    public String getName() {
-        return name;
-    }
-    public void setName(String name) {
-        this.name = name;
-    }
-    public String getEmail() {
+    
+    public String getNgoname() {
+		return ngoname;
+	}
+	public void setNgoname(String ngoname) {
+		this.ngoname = ngoname;
+	}
+	public String getEmail() {
         return email;
     }
     public void setEmail(String email) {
@@ -55,7 +56,7 @@ public class NgoRegisterDto {
     public Ngo toNgo(){
 
         Ngo ngo = new Ngo();
-        ngo.setName(name);
+        ngo.setName(ngoname);
         ngo.setAddress(address);
         ngo.setContact(contact);
         ngo.setDescription(description);

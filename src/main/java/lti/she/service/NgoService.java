@@ -9,4 +9,5 @@ public interface NgoService {
     Ngo register(Ngo ngo);
    
     List<Ngo> getNgoList();
+    List<Ngo> getNgoPendingList();
 }

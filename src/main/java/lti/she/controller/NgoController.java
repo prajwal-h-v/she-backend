@@ -30,7 +30,7 @@ public class NgoController {
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     public Ngo login(@RequestBody NgoLogin ngoLogin) {
     	try {
-    		
+    		System.out.println(ngoLogin);
     		return ngoService.login(ngoLogin);
     	}catch (Exception e) {
 			// TODO: handle exception

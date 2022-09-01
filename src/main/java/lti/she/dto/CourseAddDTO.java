@@ -97,6 +97,7 @@ int courseID;
 		course.setJobOffered(jobOffered);
 		course.setLocation(location);
 		course.setStartDate(startDate.plusDays(1));
+		course.setVerified(false);
 		
 		return course;
 	}

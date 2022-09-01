@@ -1,12 +1,17 @@
 package lti.she.entity;
 
-import javax.persistence.Entity;
+import java.util.List;
+
+import javax.persistence.*;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 @Entity
 public class Accommodation {
@@ -26,11 +31,31 @@ public class Accommodation {
 	int roomAvailable;
 	int capacity;
 	boolean dayCareCenter;
+	boolean isVerified;
+//	step added
+	@OneToMany(mappedBy = "accomodation")
+	@JsonBackReference
+	List<AccommodationStatus> accomodationStatuses;
+
+	public List<AccommodationStatus> getAccomodationStatuses() {
+		return accomodationStatuses;
+	}
+
+	public void setAccomodationStatuses(List<AccommodationStatus> accomodationStatuses) {
+		this.accomodationStatuses = accomodationStatuses;
+	}
+
+	public boolean isVerified() {
+		return isVerified;
+	}
+
+	public void setVerified(boolean isVerified) {
+		this.isVerified = isVerified;
+	}
 
 	@ManyToOne
 	@JoinColumn(name = "ngoId")
 	Ngo ngo;
-	
 
 	public int getAccommodationId() {
 		return accommodationId;
@@ -127,7 +152,5 @@ public class Accommodation {
 	public void setNgo(Ngo ngo) {
 		this.ngo = ngo;
 	}
-
-	
 
 }

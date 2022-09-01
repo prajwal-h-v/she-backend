@@ -1,5 +1,6 @@
 package lti.she.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,6 +33,20 @@ public class NgoServiceImp implements NgoService{
 	public List<Ngo> getNgoList() {
 		// TODO Auto-generated method stub
 		return dao.getAll();
+	}
+
+	@Override
+	public List<Ngo> getNgoPendingList() {
+		// TODO Auto-generated method stub
+		List<Ngo> ngos = dao.getAll();
+		List<Ngo> pNgo = new ArrayList<Ngo>();
+		for(Ngo n : ngos) {
+			if(!n.isVerified()) {
+				pNgo.add(n);
+			}
+		}
+		return pNgo;
+		
 	}
 
     
